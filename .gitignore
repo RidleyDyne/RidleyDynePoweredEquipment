@@ -1,0 +1,48 @@
+/download
+/eclipseBin
+
+/libs/
+
+## vscode
+.vscode
+
+## gradle
+**/.gradle
+**/build
+
+## ForgeGradle
+/run
+/*/run
+/*.launch
+/*/*.launch
+
+## eclipse
+/eclipse
+**/.settings
+**/.metadata
+**/.classpath
+**/.project
+**/bin
+**/.apt_generated/
+**/.factorypath
+
+## intellij
+/out
+/.idea
+/*.iml
+/*.ipr
+/*.iws
+/atlassian-ide-plugin.xml
+/classes
+
+## gedit
+*~
+## most Windows editors
+*.bak
+## OSX
+.DS_Store
+
+## local user properties
+user.properties
+
+**/logs/

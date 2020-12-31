@@ -1,0 +1,28 @@
+modLoader="javafml" #mandatory
+loaderVersion="[35,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+issueTrackerURL="https://github.com/RidleyDyne/RidleyDynePoweredEquipment/issues" #optional
+[[mods]] #mandatory
+modId="ridleydynepoweredequipment" #mandatory
+version="${version}" #mandatory
+displayName="RidleyDyne Powered Equipment" #mandatory
+#updateJSONURL="" #optional
+displayURL="https://github.com/RidleyDyne/RidleyDynePoweredEquipment" #optional
+#logoFile="" #optional
+#credits="" #optional
+authors="Mark Strendin" #optional
+description='''
+This mod adds RF/FE powered equipment that uses power instead of item durability.
+'''
+[[dependencies.ridleydynepoweredequipment]]
+      modId="forge"
+      mandatory=true
+      versionRange="[35.0,)"
+      ordering="NONE"
+      side="BOTH"
+#[[dependencies.ridleydynepoweredequipment]]
+#      modId="ridlium"
+#      mandatory=true
+#      versionRange="1.16.4-0.0.1"
+#      ordering="NONE"
+#      side="BOTH"
