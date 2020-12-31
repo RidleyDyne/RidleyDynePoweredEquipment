@@ -34,14 +34,12 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.util.text.ITextComponent;
+import ridleydyne.ridleydynepoweredequipment.init.ModItems;
 
 public class RidliumPoweredShovel extends ShovelItem {
     public RidliumPoweredShovel(double EnergyCapacity) {
         // tier, attack damage, attack speed, builder ??
-        super(ModItemTier.BASE, -1, -2.4F, new Item.Properties()
-        .maxStackSize(1)        
-        .group(RidleyDynePoweredEquipment.ITEM_GROUP)
-        );
+        super(ModItemTier.BASE, -1, -2.4F, ModItems.defaultItemProperties(1));
     }
 
 

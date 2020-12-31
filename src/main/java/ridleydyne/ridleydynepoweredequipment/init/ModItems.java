@@ -1,6 +1,8 @@
 package ridleydyne.ridleydynepoweredequipment.init;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.Properties;
+import ridleydyne.ridleydynepoweredequipment.RidleyDynePoweredEquipment;
 import ridleydyne.ridleydynepoweredequipment.item.*;
 
 public enum ModItems {
@@ -10,7 +12,7 @@ public enum ModItems {
     RIDLIUM_POWERED_AXE(new RidliumPoweredAxe()),
     RIDLIUM_POWERED_PICKAXE(new RidliumPoweredPickaxe()),
     RIDLIUM_POWERED_SWORD(new RidliumPoweredSword());
-    
+
     private final Item item;
 
     ModItems(Item item) {
@@ -26,4 +28,9 @@ public enum ModItems {
         return this.item;
     }
    
+    public static Properties defaultItemProperties(int maxStackSize) {
+        return new Item.Properties()
+            .maxStackSize(1)        
+            .group(RidleyDynePoweredEquipment.ITEM_GROUP);
+    }
 }
