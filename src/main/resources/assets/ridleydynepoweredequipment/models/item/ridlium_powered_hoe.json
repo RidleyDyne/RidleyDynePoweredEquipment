@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+      "layer0": "ridleydynepoweredequipment:item/ridlium_hoe_t1"
+    }
+  }

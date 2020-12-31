@@ -1,5 +1,9 @@
 {
     "itemGroup.ridleydynepoweredequipment": "RidleyDyne Powered Equipment",
     "item.ridleydynepoweredequipment.ridlium_energy_crystal": "Ridlium Energy Crystal",
-    "item.ridleydynepoweredequipment.ridlium_powered_shovel": "Ridlium Powered Shovel"
+    "item.ridleydynepoweredequipment.ridlium_powered_shovel": "Ridlium Powered Shovel",
+    "item.ridleydynepoweredequipment.ridlium_powered_axe": "Ridlium Powered Axe",
+    "item.ridleydynepoweredequipment.ridlium_powered_sword": "Ridlium Powered Sword",
+    "item.ridleydynepoweredequipment.ridlium_powered_pickaxe": "Ridlium Powered Pickaxe",
+    "item.ridleydynepoweredequipment.ridlium_powered_hoe": "Ridlium Powered Hoe"
 }
