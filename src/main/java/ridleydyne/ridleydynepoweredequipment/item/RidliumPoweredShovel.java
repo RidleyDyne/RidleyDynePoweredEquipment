@@ -5,9 +5,10 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -35,13 +36,18 @@ public class RidliumPoweredShovel extends ShovelItem {
     private static final IEnergyStorage EMPTY_ENERGY_STORAGE = new EnergyStorage(0);
     private ModItemTier thisItemTier;
 
+    // Energy per use
+    //  Iron tools have 250 uses. With 50000 FE, 200 FE/use is the same as iron (but this is rechargable)
+    //  Diamond tools have 1561 uses.
+    private static int energyPerUse = 200;
+
     public RidliumPoweredShovel(ModItemTier tier) {
         // tier, attack damage, attack speed, builder ??
         super(tier, 1.5F, -3.0F, ModItems.defaultItemProperties(1));
-
         this.thisItemTier = tier;
     }
 
+    // Add a fully powered version in creative inventory
     @Override
     public void fillItemGroup(@Nonnull ItemGroup group, @Nonnull NonNullList<ItemStack> items) {
         super.fillItemGroup(group, items);
@@ -100,8 +106,6 @@ public class RidliumPoweredShovel extends ShovelItem {
             return;
         }
 
-        //boolean sneakPressed = Screen.hasShiftDown();
-
         tooltip.add(new TranslationTextComponent("Stored Energy: ")
             .appendString(String.valueOf(energy.getEnergyStored()))
             .appendString(" / ")
@@ -110,61 +114,55 @@ public class RidliumPoweredShovel extends ShovelItem {
             .mergeStyle(TextFormatting.GRAY));
     }
 
-    @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        BlockPos blockpos = context.getPos();
-        BlockPos blockpos1 = blockpos.offset(context.getFace());
-        PlayerEntity playerEntity = context.getPlayer();
-
-        IEnergyStorage energy = this.getEnergyStorage(context.getItem());
-
-        // This is just debug code to see how this works
-        if (playerEntity.isSneaking()) {
-            energy.receiveEnergy(1000, false);
-        } else {
-            energy.extractEnergy(1000, false);
-        }
-
-        return ActionResultType.SUCCESS;
-
-        
+    // Actually require power to do things
+    private boolean hasPower(ItemStack stack, int powerAmount) 
+    {
+        IEnergyStorage energy = getEnergyStorage(stack);
+        return (energy.getEnergyStored() >= powerAmount);
     }
 
-    /*
+    private void spendPower(ItemStack stack, int powerAmount)
+    {        
+        IEnergyStorage energy = getEnergyStorage(stack);
+        energy.extractEnergy(powerAmount, false);
+    }
 
-    
-    
+    @Override
+    public float getDestroySpeed(ItemStack stack, BlockState state) {
 
+        // If we have enough power to use, do it, otherwise 
+        if (this.hasPower(stack, energyPerUse))
+        {
+            return super.getDestroySpeed(stack, state);
+        } else {
+            return 0;
+        }
+    }
 
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-        if (!worldIn.isRemote && state.getBlockHardness(worldIn, pos) != 0.0F) {
-           stack.damageItem(1, entityLiving, (entity) -> {
-              entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-           });
-        }
-  
-        return true;
-     }
-
-
-    
-
-    
-    
-    
-    
-
-    @Override
-	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-		return new FECapabilityProvider(new ItemFEBattery(stack, EnergyCapacity));
+        
+        // Spend energy
+        if (this.hasPower(stack, energyPerUse)) 
+        {
+            spendPower(stack, energyPerUse);
+            return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);                       
+        } else {
+            return false;
+        }        
+     }   
+     
+     @Override
+     public ActionResultType onItemUse(ItemUseContext context) {
+        
+        ItemStack stack = context.getItem();
+        if (this.hasPower(stack, energyPerUse)) 
+        {
+            spendPower(stack, energyPerUse);
+            return super.onItemUse(context);                       
+        } else {
+            return ActionResultType.FAIL;
+        } 
     }
-    
 
-
-    
-    
-    
-    */
 }
