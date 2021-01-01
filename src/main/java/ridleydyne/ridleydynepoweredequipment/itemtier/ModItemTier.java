@@ -1,34 +1,28 @@
 package ridleydyne.ridleydynepoweredequipment.itemtier;
 
 import net.minecraft.item.IItemTier;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
 import java.util.function.Supplier;
 
-/*
-    maxUses
-        Setting this to 0 disables durability
-
-    Harvest Level
-        0   Wood
-        1   Stone / Gold
-        2   Iron
-        3   Diamond
-
-    Efficiency:  0 means it will break dirt but not anything higher than dirt
-                 5 - seemed ok, maybe a bit fast?
-                 15 - faster than a diamond pick
-*/
-
 public enum ModItemTier implements IItemTier {
-    BASE (4, 0, 5, 5, 25, () -> {
-        return Ingredient.fromItems(Items.PAPER);
-    }),
+    // Harvest level
+    //  0 - Wood tools
+    //  1 - Stone / Gold tools
+    //  2 - Iron
+    //  3 - Diamond
+    //  4 - Netherite
+    // Max uses (setting to 0 disables durability)
+    // Efficiency
+    //  0 means it will break dirt but not anything higher than dirt
+    //  5 - seemed ok, maybe a bit fast?
+    //  15 - faster than a diamond pick
+    // Attack damage
+    // Enchantability
+    // Repair material
 
-    UPGRADED (5, 0, 9, 7, 25, () -> {
-        return Ingredient.fromItems(Items.PAPER);
-    });
+    BASE (3, 0, 6.0F, 3.0F, 10, () -> { return Ingredient.EMPTY; }),
+    UPGRADED (4, 0, 9.0F, 4.0F, 15, () -> { return Ingredient.EMPTY; });
 
     ModItemTier(
             int harvestLevel,
@@ -52,7 +46,6 @@ public enum ModItemTier implements IItemTier {
     private float attackDamage;
     private int enchantability;
     private LazyValue<Ingredient> repairMaterial;
-
 
     @Override
     public int getMaxUses() {
