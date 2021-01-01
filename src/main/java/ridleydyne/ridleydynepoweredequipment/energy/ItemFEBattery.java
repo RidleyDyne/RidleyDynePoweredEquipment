@@ -6,8 +6,8 @@ import net.minecraftforge.energy.EnergyStorage;
 public class ItemFEBattery extends EnergyStorage {
     private final ItemStack container;
 	
-	private static String TAG_MAX_ENERGY = "max_energy";
-	private static String TAG_CURRENT_ENERGY = "energy";
+	public static String TAG_MAX_ENERGY = "max_energy";
+	public static String TAG_CURRENT_ENERGY = "energy";
 
     public ItemFEBattery(ItemStack itemStack, int capacity, int maxEnergyIO) {
 		super(getEnergyCapacity(itemStack, capacity), maxEnergyIO, maxEnergyIO);

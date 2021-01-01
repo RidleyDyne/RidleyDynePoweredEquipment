@@ -2,16 +2,19 @@ package ridleydyne.ridleydynepoweredequipment.item;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -24,6 +27,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import ridleydyne.ridleydynepoweredequipment.energy.FECapabilityProvider;
+import ridleydyne.ridleydynepoweredequipment.energy.ItemFEBattery;
 import ridleydyne.ridleydynepoweredequipment.init.ModItems;
 import ridleydyne.ridleydynepoweredequipment.itemtier.ModItemTier;
 
@@ -36,6 +40,17 @@ public class RidliumPoweredShovel extends ShovelItem {
         super(tier, 1.5F, -3.0F, ModItems.defaultItemProperties(1));
 
         this.thisItemTier = tier;
+    }
+
+    @Override
+    public void fillItemGroup(@Nonnull ItemGroup group, @Nonnull NonNullList<ItemStack> items) {
+        super.fillItemGroup(group, items);
+        if (!isInGroup(group))
+            return;
+
+        ItemStack charged = new ItemStack(this);
+        charged.getOrCreateTag().putInt(ItemFEBattery.TAG_CURRENT_ENERGY, thisItemTier.getEnergyCapacity());
+        items.add(charged);
     }
 
     @Nullable
