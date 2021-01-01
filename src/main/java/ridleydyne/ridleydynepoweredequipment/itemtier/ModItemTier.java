@@ -21,8 +21,8 @@ public enum ModItemTier implements IItemTier {
     // Enchantability
     // Repair material
 
-    TIER1 (3, 0, 6.0F, 3.0F, 10, () -> { return Ingredient.EMPTY; }, 500000),
-    TIER2 (4, 0, 9.0F, 4.0F, 15, () -> { return Ingredient.EMPTY; }, 5000000);
+    TIER1 (3, 0, 6.0F, 3.0F, 10, () -> { return Ingredient.EMPTY; }, 50000, 5000),
+    TIER2 (4, 0, 9.0F, 4.0F, 15, () -> { return Ingredient.EMPTY; }, 500000, 50000);
 
     ModItemTier(
             int harvestLevel,
@@ -31,7 +31,8 @@ public enum ModItemTier implements IItemTier {
             float attackDamage,
             int enchantability,
             Supplier<Ingredient> repairMaterial,
-            double energyCapacity
+            int energyCapacity,
+            int maxEnergyIO
     ) {
         this.harvestLevel = harvestLevel;
         this.maxUses = maxUses;
@@ -40,6 +41,7 @@ public enum ModItemTier implements IItemTier {
         this.enchantability = enchantability;
         this.repairMaterial = new LazyValue<>(repairMaterial);
         this.energyCapacity = energyCapacity;
+        this.maxEnergyIO = maxEnergyIO;
     }
 
     private int harvestLevel;
@@ -48,7 +50,8 @@ public enum ModItemTier implements IItemTier {
     private float attackDamage;
     private int enchantability;
     private LazyValue<Ingredient> repairMaterial;
-    private double energyCapacity;
+    private int energyCapacity;
+    private int maxEnergyIO;
 
     @Override
     public int getMaxUses() {
@@ -80,8 +83,12 @@ public enum ModItemTier implements IItemTier {
         return this.repairMaterial.getValue();
     }
 
-    public double getEnergyCapacity() {
+    public int getEnergyCapacity() {
         return this.energyCapacity;
+    }
+
+    public int getMaxEnergyIO() {
+        return this.maxEnergyIO;
     }
     
 }

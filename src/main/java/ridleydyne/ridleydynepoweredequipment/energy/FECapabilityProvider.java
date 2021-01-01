@@ -1,5 +1,9 @@
 package ridleydyne.ridleydynepoweredequipment.energy;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -8,14 +12,20 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 public class FECapabilityProvider implements ICapabilityProvider {
-	protected IEnergyStorage instance;
+	private ItemStack itemStack;
+	private int energyCapacity;
+	private int maxEnergyIO;
+	private LazyOptional<IEnergyStorage> capability = LazyOptional.of(() -> new ItemFEBattery(itemStack, energyCapacity, maxEnergyIO));
 	
-	public FECapabilityProvider(IEnergyStorage instance) {
-		this.instance = instance;
+	public FECapabilityProvider(ItemStack itemStack, int energyCapacity, int maxEnergyIO) {
+		this.itemStack = itemStack;
+		this.energyCapacity = energyCapacity;
+		this.maxEnergyIO = maxEnergyIO;
 	}
 
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction direction) {
-		return CapabilityEnergy.ENERGY.orEmpty(capability, LazyOptional.of(() -> this.instance));
-	}
+	@Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        return cap == CapabilityEnergy.ENERGY ? capability.cast() : LazyOptional.empty();
+    }
 }
