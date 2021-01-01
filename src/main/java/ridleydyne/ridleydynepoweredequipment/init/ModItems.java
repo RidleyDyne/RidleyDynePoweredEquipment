@@ -32,6 +32,7 @@ public enum ModItems {
     public static Properties defaultItemProperties(int maxStackSize) {
         return new Item.Properties()
             .maxStackSize(1)        
-            .group(RidleyDynePoweredEquipment.ITEM_GROUP);
+            .group(RidleyDynePoweredEquipment.ITEM_GROUP)
+            .setNoRepair();
     }
 }
