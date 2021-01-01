@@ -21,8 +21,8 @@ public enum ModItemTier implements IItemTier {
     // Enchantability
     // Repair material
 
-    BASE (3, 0, 6.0F, 3.0F, 10, () -> { return Ingredient.EMPTY; }),
-    UPGRADED (4, 0, 9.0F, 4.0F, 15, () -> { return Ingredient.EMPTY; });
+    TIER1 (3, 0, 6.0F, 3.0F, 10, () -> { return Ingredient.EMPTY; }),
+    TIER2 (4, 0, 9.0F, 4.0F, 15, () -> { return Ingredient.EMPTY; });
 
     ModItemTier(
             int harvestLevel,

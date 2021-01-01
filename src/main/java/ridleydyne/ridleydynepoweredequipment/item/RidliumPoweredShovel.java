@@ -39,7 +39,7 @@ import ridleydyne.ridleydynepoweredequipment.init.ModItems;
 public class RidliumPoweredShovel extends ShovelItem {
     public RidliumPoweredShovel(double EnergyCapacity) {
         // tier, attack damage, attack speed, builder ??
-        super(ModItemTier.BASE, -1, -2.4F, ModItems.defaultItemProperties(1));
+        super(ModItemTier.TIER1, -1, -2.4F, ModItems.defaultItemProperties(1));
     }
 
 

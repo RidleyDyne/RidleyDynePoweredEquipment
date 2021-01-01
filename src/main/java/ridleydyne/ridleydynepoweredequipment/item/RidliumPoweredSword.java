@@ -9,7 +9,7 @@ import ridleydyne.ridleydynepoweredequipment.init.ModItems;
 public class RidliumPoweredSword extends SwordItem {
     public RidliumPoweredSword() {
         // tier, attack damage, attack speed, builder ??
-        super(ModItemTier.BASE, 4, -2.4F, ModItems.defaultItemProperties(1));
+        super(ModItemTier.TIER1, 4, -2.4F, ModItems.defaultItemProperties(1));
     }
     
 }

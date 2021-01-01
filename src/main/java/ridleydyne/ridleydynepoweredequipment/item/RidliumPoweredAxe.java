@@ -9,7 +9,7 @@ import ridleydyne.ridleydynepoweredequipment.itemtier.ModItemTier;
 public class RidliumPoweredAxe extends AxeItem {
     public RidliumPoweredAxe() {
         // tier, attack damage, attack speed, builder ??
-        super(ModItemTier.BASE, 2, -2.4F, ModItems.defaultItemProperties(1));
+        super(ModItemTier.TIER1, 2, -2.4F, ModItems.defaultItemProperties(1));
     }
     
 }
