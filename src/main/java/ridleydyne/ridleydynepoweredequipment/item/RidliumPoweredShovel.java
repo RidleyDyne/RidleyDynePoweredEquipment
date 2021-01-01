@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTier;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.nbt.CompoundNBT;
@@ -37,9 +38,9 @@ import net.minecraft.util.text.ITextComponent;
 import ridleydyne.ridleydynepoweredequipment.init.ModItems;
 
 public class RidliumPoweredShovel extends ShovelItem {
-    public RidliumPoweredShovel(double EnergyCapacity) {
+    public RidliumPoweredShovel(ModItemTier tier) {
         // tier, attack damage, attack speed, builder ??
-        super(ModItemTier.TIER1, -1, -2.4F, ModItems.defaultItemProperties(1));
+        super(tier, 1.5F, -3.0F, ModItems.defaultItemProperties(1));
     }
 
 

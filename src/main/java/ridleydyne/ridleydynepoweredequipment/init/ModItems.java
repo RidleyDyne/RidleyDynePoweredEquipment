@@ -4,14 +4,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import ridleydyne.ridleydynepoweredequipment.RidleyDynePoweredEquipment;
 import ridleydyne.ridleydynepoweredequipment.item.*;
+import ridleydyne.ridleydynepoweredequipment.itemtier.*;
 
 public enum ModItems {
     RIDLIUM_ENERGY_CRYSTAL(new RidliumEnergyCrystal()),
-    RIDLIUM_POWERED_SHOVEL(new RidliumPoweredShovel(500)), 
-    RIDLIUM_POWERED_HOE(new RidliumPoweredHoe()),
-    RIDLIUM_POWERED_AXE(new RidliumPoweredAxe()),
-    RIDLIUM_POWERED_PICKAXE(new RidliumPoweredPickaxe()),
-    RIDLIUM_POWERED_SWORD(new RidliumPoweredSword());
+    RIDLIUM_POWERED_SHOVEL(new RidliumPoweredShovel(ModItemTier.TIER1)), 
+    RIDLIUM_POWERED_HOE(new RidliumPoweredHoe(ModItemTier.TIER1)),
+    RIDLIUM_POWERED_AXE(new RidliumPoweredAxe(ModItemTier.TIER1)),
+    RIDLIUM_POWERED_PICKAXE(new RidliumPoweredPickaxe(ModItemTier.TIER1)),
+    RIDLIUM_POWERED_SWORD(new RidliumPoweredSword(ModItemTier.TIER1));
 
     private final Item item;
 
