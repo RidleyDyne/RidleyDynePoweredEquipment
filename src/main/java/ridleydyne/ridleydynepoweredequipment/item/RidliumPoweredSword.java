@@ -42,12 +42,19 @@ public class RidliumPoweredSword extends SwordItem {
     //  Iron tools have 250 uses. With 50000 FE, 200 FE/use is the same as iron (but this is rechargable)
     //  Diamond tools have 1561 uses.
     private static int energyPerUse = 200;
-    private static float energizedDamage = 5.0F; // Extra damage if there is power left
+    private static float energizedDamageModifier = 2.5F; // Extra damage if there is power left
 
     public RidliumPoweredSword(ModItemTier tier) {
         // tier, attack damage, attack speed, builder ??
         super(tier, 3, -2.4F, ModItems.defaultItemProperties(1));
         this.thisItemTier = tier;
+    }
+
+    private static float getEnergizedDamage(ItemStack stack) 
+    {
+        SwordItem sword = (SwordItem)stack.getItem();
+        float newDamage = (sword.getAttackDamage() + 1)  * energizedDamageModifier;
+        return newDamage;
     }
 
     private static DamageSource getDamageSource() {
@@ -119,8 +126,8 @@ public class RidliumPoweredSword extends SwordItem {
             .appendString(String.valueOf(energy.getMaxEnergyStored()))
             .appendString(" FE")
             .mergeStyle(TextFormatting.GRAY));
-            
-        tooltip.add(new TranslationTextComponent("+" + energizedDamage + " damage while powered")
+        
+        tooltip.add(new TranslationTextComponent(String.valueOf(getEnergizedDamage(stack)) + " damage while powered")
             .mergeStyle(TextFormatting.DARK_RED));
     }
 
@@ -142,11 +149,10 @@ public class RidliumPoweredSword extends SwordItem {
 
         if (this.hasPower(stack, energyPerUse)) 
         {
+            target.attackEntityFrom(getDamageSource(), getEnergizedDamage(stack));
             spendPower(stack, energyPerUse); 
-            target.attackEntityFrom(getDamageSource(), energizedDamage);
         } 
 
-        
         return true;                      
      }
 
